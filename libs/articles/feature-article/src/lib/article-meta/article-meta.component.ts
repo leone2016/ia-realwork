@@ -30,10 +30,12 @@ export class ArticleMetaComponent {
   }
 
   toggleFollow(author: Profile) {
-    console.log(author)
     if (author.following) {
+      console.log("UnFOLLOW")
       this.unfollow.emit(author.username);
     } else {
+      console.log("FOLLOW")
+
       this.follow.emit(author.username);
     }
   }

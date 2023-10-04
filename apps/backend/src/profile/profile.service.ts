@@ -73,7 +73,8 @@ console.log(followingUser.email, followerEmail)
       throw new HttpException('FollowerEmail and FollowingId cannot be equal.', HttpStatus.BAD_REQUEST);
     }
 
-    followingUser.followers.add(followerUser);
+    //followingUser.followers.add(followerUser);
+    followerUser.followers.add(followingUser);
     await this.em.flush();
 
     const profile: IProfileData = {

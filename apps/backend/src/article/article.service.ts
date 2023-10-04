@@ -202,7 +202,7 @@ export class ArticleService {
       .leftJoin('a.author', 'u')
       .leftJoin('a.userFavorites', 'uf')
       .groupBy(['u.id', 'u.username'])
-      .orderBy({ [3]: QueryOrder.DESC })
+      .orderBy({ [4]: QueryOrder.DESC })
 
     if ('limit' in query) {
       qb.limit(+query.limit);

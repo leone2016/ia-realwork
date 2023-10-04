@@ -48,6 +48,7 @@ export const articleFeature = createFeature({
         ...action.article.authors,
         action.article.author
         ]
+
       return {
         ...state,
         data: { ...action.article, authors},
@@ -84,12 +85,27 @@ export const articleFeature = createFeature({
       comments: articleInitialState.comments,
     })),
     on(articleActions.followSuccess, articleActions.unfollowSuccess, (state, action) => {
-      const data: Article = { ...state.data, author: action.profile };
+      const authors: any  = state.data.authors
+        .map( (author: Profile)=>{
+          if(author.username === action.profile.username){
+            return action.profile
+          }
+          return author;
+        })
+
+      const data: Article = { ...state.data, authors: authors };
       return { ...state, data };
     }),
-    on(articlesActions.favoriteSuccess, articlesActions.unfavoriteSuccess, (state, action) => ({
-      ...state,
-      data: action.article,
-    })),
+    on(articlesActions.favoriteSuccess, articlesActions.unfavoriteSuccess, (state, action) => {
+      let authors:Profile[] = [
+        ...action.article.authors,
+        action.article.author
+      ]
+
+      return {
+        ...state,
+        data: { ...action.article, authors},
+      }
+    }),
   ),
 });
